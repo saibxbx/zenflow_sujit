@@ -147,11 +147,31 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden">
+    <div className="min-h-screen flex relative overflow-hidden pb-16 lg:pb-0">
       {/* Floating Orbs Background */}
       <div className="floating-orb orb-1" />
       <div className="floating-orb orb-2" />
       <div className="floating-orb orb-3" />
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 lg:hidden">
+        <div className="flex justify-around items-center h-16 px-2">
+          {sidebarItems.slice(0, 5).map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleNavClick(item.id)}
+              className={`flex flex-col items-center justify-center py-2 px-3 rounded-lg transition-all ${
+                activeView === item.id
+                  ? 'text-green-600'
+                  : 'text-gray-500'
+              }`}
+            >
+              <item.icon className="w-5 h-5" />
+              <span className="text-xs mt-1 font-medium">{item.label}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
       
       {/* Settings Modal */}
       {showSettings && (
@@ -230,21 +250,24 @@ export default function Home() {
         <header className="bg-white border-b border-gray-100 px-6 py-4 sticky top-0 z-40">
           <div className="flex items-center justify-between">
             <div className="lg:hidden flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center">
                 <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                 </svg>
               </div>
-              <span className="font-bold text-lg gradient-text">ZenFlow</span>
+              <span className="font-bold text-lg text-green-600">ZenFlow</span>
             </div>
 
             {/* Page Title */}
             <h1 className="hidden lg:block text-xl font-bold text-gray-800">{getPageTitle()}</h1>
 
             {/* Mobile user avatar */}
-            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center lg:hidden">
-              <User className="w-5 h-5 text-purple-600" />
-            </div>
+            <button 
+              onClick={() => setShowSettings(true)}
+              className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center lg:hidden"
+            >
+              <User className="w-5 h-5 text-green-600" />
+            </button>
           </div>
         </header>
 
