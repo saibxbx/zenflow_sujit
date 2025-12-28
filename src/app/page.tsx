@@ -200,7 +200,7 @@ export default function Home() {
               className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-200 ${
                 activeView === item.id 
                   ? 'bg-green-50 text-green-600 font-semibold border-l-4 border-green-500' 
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  : 'text-gray-900 hover:bg-gray-100 font-medium'
               }`}
             >
               <item.icon className="w-5 h-5" />
