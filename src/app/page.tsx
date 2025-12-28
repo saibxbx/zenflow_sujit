@@ -5,6 +5,7 @@ import { LayoutDashboard, CheckSquare, Calendar, Timer, BarChart3, Settings, Bel
 import TodoList from '@/components/TodoList';
 import DailyFocus from '@/components/DailyFocus';
 import PomodoroTimer from '@/components/PomodoroTimer';
+import MotivationalQuote from '@/components/MotivationalQuote';
 
 const ACTIVITY_KEY = 'zenflow-weekly-activity';
 
@@ -146,7 +147,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex relative overflow-hidden">
+      {/* Floating Orbs Background */}
+      <div className="floating-orb orb-1" />
+      <div className="floating-orb orb-2" />
+      <div className="floating-orb orb-3" />
+      
       {/* Settings Modal */}
       {showSettings && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowSettings(false)}>
@@ -176,37 +182,40 @@ export default function Home() {
       )}
 
       {/* Sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-100 p-6 fixed h-full">
+      <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-100 p-6 fixed h-full animate-slide-in-left z-30">
         <div className="flex items-center gap-3 mb-10">
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center animate-glow-pulse">
             <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
           </div>
-          <span className="text-xl font-bold gradient-text">ZenFlow</span>
+          <span className="text-xl font-bold animate-gradient-text">ZenFlow</span>
         </div>
 
-        <nav className="flex-1 space-y-2">
+        <nav className="flex-1 space-y-2 stagger-children">
           {sidebarItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
-              className={`sidebar-item w-full ${activeView === item.id ? 'active' : ''}`}
+              className={`sidebar-item w-full ripple ${activeView === item.id ? 'active' : ''}`}
             >
-              <item.icon className="w-5 h-5" />
+              <item.icon className="w-5 h-5 icon-hover" />
               {item.label}
             </button>
           ))}
         </nav>
 
         <div className="pt-6 border-t border-gray-100">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-              <User className="w-5 h-5 text-purple-600" />
+          <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer group">
+            <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-lg shadow-green-500/20 group-hover:scale-105 transition-transform">
+              <User className="w-5 h-5 text-white" />
             </div>
             <div>
               <p className="font-medium text-gray-800 text-sm">User</p>
-              <p className="text-xs text-gray-400">Free Plan</p>
+              <p className="text-xs text-gray-400 flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Free Plan
+              </p>
             </div>
           </div>
         </div>
@@ -239,23 +248,51 @@ export default function Home() {
           {/* Dashboard View - Shows all */}
           {activeView === 'dashboard' && (
             <>
-              <div className="mb-8">
-                <h1 className="text-2xl font-bold text-gray-800 lg:hidden">Good Afternoon, User 👋</h1>
-                <p className="text-gray-500 text-base">Here&apos;s your productivity overview for today</p>
+              <div className="mb-8 animate-fade-in-up">
+                <div className="flex items-center gap-4">
+                  <div className="hidden md:block">
+                    <svg viewBox="0 0 80 80" className="w-16 h-16 animate-float">
+                      <defs>
+                        <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#2ecc71"/>
+                          <stop offset="100%" stopColor="#58d68d"/>
+                        </linearGradient>
+                      </defs>
+                      <circle cx="40" cy="40" r="35" fill="none" stroke="url(#waveGrad)" strokeWidth="2" strokeOpacity="0.3"/>
+                      <circle cx="40" cy="40" r="25" fill="none" stroke="url(#waveGrad)" strokeWidth="2" strokeOpacity="0.5"/>
+                      <circle cx="40" cy="40" r="15" fill="url(#waveGrad)" fillOpacity="0.2"/>
+                      <text x="40" y="46" textAnchor="middle" fontSize="24">👋</text>
+                    </svg>
+                  </div>
+                  <div>
+                    <h1 className="text-2xl font-bold text-gray-800 lg:hidden">Good Afternoon, User 👋</h1>
+                    <p className="text-gray-500 text-base">Here&apos;s your productivity overview for today</p>
+                  </div>
+                </div>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:row-span-2 min-h-[500px]">
+                <div className="lg:row-span-2 min-h-[500px] animate-fade-in-up animate-delay-100">
                   <TodoList />
                 </div>
-                <div className="min-h-[400px]">
+                <div className="min-h-[400px] animate-fade-in-up animate-delay-200">
                   <DailyFocus />
                 </div>
-                <div className="min-h-[400px]">
+                <div className="min-h-[400px] animate-fade-in-up animate-delay-300">
                   <PomodoroTimer />
                 </div>
-                <div className="lg:col-span-2 card p-6">
+                <div className="lg:col-span-2 animate-fade-in-up animate-delay-400">
+                  <MotivationalQuote />
+                </div>
+                <div className="lg:col-span-3 card card-hover-lift p-6 animate-fade-in-up animate-delay-400">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-lg font-semibold text-gray-800">Weekly Insights</h3>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500/20 to-green-600/10 flex items-center justify-center">
+                        <svg viewBox="0 0 24 24" className="w-5 h-5 text-green-500">
+                          <path fill="currentColor" d="M3 13h2v8H3v-8zm4-6h2v14H7V7zm4 3h2v11h-2V10zm4-6h2v17h-2V4zm4 4h2v13h-2V8z"/>
+                        </svg>
+                      </div>
+                      <h3 className="text-lg font-semibold text-gray-800">Weekly Insights</h3>
+                    </div>
                     <span className="text-sm text-gray-400">Tasks completed per day</span>
                   </div>
                   <div className="flex items-end justify-between gap-3 h-36 px-2">
@@ -278,15 +315,30 @@ export default function Home() {
                     })}
                   </div>
                   <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-gray-100">
-                    <div className="text-center">
+                    <div className="text-center p-3 rounded-xl bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300 group">
+                      <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-purple-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg viewBox="0 0 24 24" className="w-4 h-4 text-purple-500">
+                          <path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
+                        </svg>
+                      </div>
                       <p className="text-2xl font-bold text-purple-600">{totalFocus >= 60 ? `${(totalFocus / 60).toFixed(1)}h` : `${totalFocus}m`}</p>
                       <p className="text-sm text-gray-500">Total Focus</p>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center p-3 rounded-xl bg-green-500/5 hover:bg-green-500/10 transition-all duration-300 group">
+                      <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-green-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg viewBox="0 0 24 24" className="w-4 h-4 text-green-500">
+                          <path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                        </svg>
+                      </div>
                       <p className="text-2xl font-bold text-green-600">{totalTasks}</p>
                       <p className="text-sm text-gray-500">Tasks Done</p>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center p-3 rounded-xl bg-orange-500/5 hover:bg-orange-500/10 transition-all duration-300 group">
+                      <div className="w-8 h-8 mx-auto mb-2 rounded-lg bg-orange-500/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg viewBox="0 0 24 24" className="w-4 h-4 text-orange-500">
+                          <path fill="currentColor" d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                        </svg>
+                      </div>
                       <p className="text-2xl font-bold text-orange-500">{totalSessions}</p>
                       <p className="text-sm text-gray-500">Sessions</p>
                     </div>

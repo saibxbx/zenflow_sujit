@@ -156,11 +156,11 @@ export default function DailyFocus() {
     };
 
     return (
-        <div className="card p-6 h-full flex flex-col">
+        <div className="card card-hover-lift p-6 h-full flex flex-col">
             {/* Header */}
             <div className="flex items-center justify-between mb-5">
                 <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-green-500" />
+                    <Calendar className="w-5 h-5 text-green-500 icon-hover" />
                     Activity Planner
                 </h2>
             </div>
@@ -169,16 +169,16 @@ export default function DailyFocus() {
             <div className="flex items-center justify-between mb-4">
                 <button
                     onClick={prevMonth}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-110 btn-press"
                 >
                     <ChevronLeft className="w-5 h-5 text-gray-400" />
                 </button>
-                <span className="font-bold text-gray-200">
+                <span className="font-bold text-gray-200 animate-fade-in-up">
                     {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
                 </span>
                 <button
                     onClick={nextMonth}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    className="p-2 hover:bg-white/10 rounded-lg transition-all duration-300 hover:scale-110 btn-press"
                 >
                     <ChevronRight className="w-5 h-5 text-gray-400" />
                 </button>
@@ -200,18 +200,18 @@ export default function DailyFocus() {
                             key={index}
                             onClick={() => day && selectDate(day)}
                             disabled={!day}
-                            className={`aspect-square flex flex-col items-center justify-center text-sm transition-all duration-200 relative
-                ${day === null ? '' : 'hover:bg-white/10 cursor-pointer'}
+                            className={`aspect-square flex flex-col items-center justify-center text-sm transition-all duration-300 relative btn-press
+                ${day === null ? '' : 'hover:bg-white/10 hover:scale-110 cursor-pointer'}
                 ${isSelected(day)
-                                    ? 'bg-green-500 text-white font-semibold rounded-full'
+                                    ? 'bg-green-500 text-white font-semibold rounded-full animate-scale-in shadow-lg shadow-green-500/30'
                                     : isToday(day)
-                                        ? 'bg-green-500/20 text-green-400 font-semibold rounded-full'
+                                        ? 'bg-green-500/20 text-green-400 font-semibold rounded-full animate-border-glow border border-green-500/50'
                                         : 'text-gray-300 rounded-lg'
                                 }`}
                         >
                             {day}
                             {hasEvents(day) && !isSelected(day) && (
-                                <div className="absolute bottom-1 w-1 h-1 bg-green-500 rounded-full" />
+                                <div className="absolute bottom-1 w-1 h-1 bg-green-500 rounded-full animate-glow-pulse" />
                             )}
                         </button>
                     ))}
@@ -233,18 +233,19 @@ export default function DailyFocus() {
                         </div>
 
                         {showEventInput && (
-                            <div className="flex gap-2 mb-3">
+                            <div className="flex items-center gap-2 mb-3">
                                 <input
                                     type="text"
                                     value={newEventTitle}
                                     onChange={(e) => setNewEventTitle(e.target.value)}
                                     onKeyPress={(e) => e.key === 'Enter' && addEvent()}
                                     placeholder="Add event..."
-                                    className="input-field flex-1 py-2 text-sm"
+                                    className="input-field flex-1 py-2 px-3 text-sm"
                                     autoFocus
                                 />
-                                <button onClick={addEvent} className="btn-primary py-2 px-3">
+                                <button onClick={addEvent} className="btn-primary py-2 px-4 text-sm flex items-center gap-1 flex-shrink-0">
                                     <Check className="w-4 h-4" />
+                                    Add
                                 </button>
                             </div>
                         )}
@@ -286,6 +287,25 @@ export default function DailyFocus() {
                     </div>
                 ) : (
                     <p className="text-sm text-gray-400 text-center py-4">
+                        <div className="w-16 h-16 mx-auto mb-3">
+                            <svg viewBox="0 0 80 80" className="w-full h-full animate-float-slow">
+                                <defs>
+                                    <linearGradient id="calGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#2ecc71" stopOpacity="0.3"/>
+                                        <stop offset="100%" stopColor="#27ae60" stopOpacity="0.1"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect x="15" y="20" width="50" height="45" rx="6" fill="url(#calGrad)" stroke="#2ecc71" strokeWidth="1.5" strokeOpacity="0.4"/>
+                                <rect x="15" y="20" width="50" height="12" rx="6" fill="#2ecc71" fillOpacity="0.2"/>
+                                <circle cx="28" cy="15" r="3" fill="#2ecc71" fillOpacity="0.5"/>
+                                <circle cx="52" cy="15" r="3" fill="#2ecc71" fillOpacity="0.5"/>
+                                <line x1="28" y1="15" x2="28" y2="23" stroke="#2ecc71" strokeWidth="2" strokeOpacity="0.5" strokeLinecap="round"/>
+                                <line x1="52" y1="15" x2="52" y2="23" stroke="#2ecc71" strokeWidth="2" strokeOpacity="0.5" strokeLinecap="round"/>
+                                <circle cx="30" cy="45" r="4" fill="#2ecc71" fillOpacity="0.3"/>
+                                <circle cx="40" cy="52" r="4" fill="#2ecc71" fillOpacity="0.5"/>
+                                <circle cx="50" cy="45" r="4" fill="#2ecc71" fillOpacity="0.3"/>
+                            </svg>
+                        </div>
                         Select a date to view or add events
                     </p>
                 )}

@@ -142,7 +142,7 @@ export default function PomodoroTimer() {
     ];
 
     return (
-        <div className="card p-5 h-full flex flex-col overflow-hidden relative">
+        <div className="card card-hover-lift p-5 h-full flex flex-col overflow-hidden relative">
             {/* Settings Modal - Full overlay */}
             {showSettings && (
                 <div className="absolute inset-0 bg-white z-50 p-5 flex flex-col rounded-2xl">
@@ -231,17 +231,17 @@ export default function PomodoroTimer() {
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                    <Timer className="w-5 h-5 text-purple-600" />
+                    <Timer className="w-5 h-5 text-purple-600 icon-hover" />
                     Focus Timer
                 </h2>
                 <div className="flex items-center gap-1">
-                    <div className="badge badge-green text-xs">
+                    <div className="badge badge-green text-xs animate-glow-pulse">
                         <Zap className="w-3 h-3" />
                         {sessions}
                     </div>
                     <button
                         onClick={() => { setTempSettings(settings); setShowSettings(true); }}
-                        className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                        className="p-1.5 hover:bg-gray-100 rounded-lg transition-all duration-300 hover:rotate-90 btn-press"
                         aria-label="Timer settings"
                     >
                         <Settings className="w-4 h-4 text-gray-500" />
@@ -317,7 +317,7 @@ export default function PomodoroTimer() {
                     <button
                         onClick={resetTimer}
                         className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 
-                       hover:bg-gray-200 transition-all duration-200"
+                       hover:bg-gray-200 transition-all duration-300 hover:rotate-[-360deg] btn-press"
                         id="reset-btn"
                         aria-label="Reset timer"
                     >
@@ -327,12 +327,12 @@ export default function PomodoroTimer() {
                     <button
                         onClick={toggleTimer}
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg
-                       transition-all duration-300 hover:scale-105 active:scale-95
+                       transition-all duration-300 hover:scale-110 active:scale-95 ripple
                        ${isRunning
-                                ? 'bg-orange-500 hover:bg-orange-600'
+                                ? 'bg-orange-500 hover:bg-orange-600 shadow-orange-500/30'
                                 : mode === 'work'
-                                    ? 'bg-green-500 hover:bg-green-600 pulse-play'
-                                    : 'bg-green-500 hover:bg-green-600 pulse-play'}`}
+                                    ? 'bg-green-500 hover:bg-green-600 pulse-play shadow-green-500/30'
+                                    : 'bg-green-500 hover:bg-green-600 pulse-play shadow-green-500/30'}`}
                         id="play-pause-btn"
                         aria-label={isRunning ? 'Pause timer' : 'Start timer'}
                     >
@@ -351,13 +351,13 @@ export default function PomodoroTimer() {
             <div className="mt-4 pt-4 border-t border-gray-100">
                 <div className="flex items-center justify-between text-sm">
                     <span className="text-gray-500">Today</span>
-                    <span className="font-semibold text-gray-800">{sessions * settings.workDuration}m</span>
+                    <span className="font-semibold text-gray-800 animate-count">{sessions * settings.workDuration}m</span>
                 </div>
-                <div className="mt-2 flex gap-1">
+                <div className="mt-2 flex gap-1 stagger-children">
                     {[...Array(8)].map((_, i) => (
                         <div
                             key={i}
-                            className={`h-1.5 flex-1 rounded-full transition-colors ${i < sessions ? 'bg-purple-500' : 'bg-gray-100'
+                            className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${i < sessions ? 'bg-purple-500 progress-glow' : 'bg-gray-100'
                                 }`}
                         />
                     ))}
