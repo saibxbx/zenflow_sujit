@@ -95,15 +95,14 @@ export default function TodoList() {
 
             {/* Add Todo Input with Icon */}
             <div className="flex gap-3 mb-5 flex-shrink-0">
-                <div className="flex-1 relative">
-                    <Plus className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                <div className="flex-1">
                     <input
                         type="text"
                         value={newTodo}
                         onChange={(e) => setNewTodo(e.target.value)}
                         onKeyPress={handleKeyPress}
                         placeholder="Add a new task..."
-                        className="input-field w-full pl-12 focus-ring"
+                        className="input-field w-full focus-ring"
                         id="todo-input"
                     />
                 </div>
