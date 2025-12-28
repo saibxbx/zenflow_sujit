@@ -103,7 +103,7 @@ export default function TodoList() {
                         onChange={(e) => setNewTodo(e.target.value)}
                         onKeyPress={handleKeyPress}
                         placeholder="Add a new task..."
-                        className="input-field w-full pl-11 focus-ring"
+                        className="input-field w-full pl-12 focus-ring"
                         id="todo-input"
                     />
                 </div>
