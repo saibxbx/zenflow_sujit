@@ -2,16 +2,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Dark Theme with Deep Blue/Green Gradient Base */
-  --bg-primary: #030712;
-  --bg-gradient-start: #030712;
-  --bg-gradient-mid: #051515;
-  --bg-gradient-end: #030a12;
+  /* Premium Dark Theme - Ultra Dark */
+  --bg-primary: #000000;
+  --bg-gradient-start: #000000;
+  --bg-gradient-mid: #020a0a;
+  --bg-gradient-end: #000508;
 
-  --bg-secondary: #0a1118;
-  --bg-card: rgba(15, 23, 35, 0.7);
-  --bg-card-solid: #0f1723;
-  --bg-hover: rgba(255, 255, 255, 0.05);
+  --bg-secondary: #050808;
+  --bg-card: rgba(8, 12, 16, 0.85);
+  --bg-card-solid: #080c10;
+  --bg-hover: rgba(255, 255, 255, 0.03);
 
   --text-primary: #ffffff;
   --text-secondary: #cbd5e1;
@@ -96,25 +96,25 @@ nextjs-portal {
 
 /* Premium Glassmorphism Card */
 .card {
-  background: linear-gradient(145deg, rgba(15, 23, 35, 0.8) 0%, rgba(15, 23, 35, 0.6) 100%);
+  background: linear-gradient(145deg, rgba(8, 12, 16, 0.9) 0%, rgba(8, 12, 16, 0.75) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 24px;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
-    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+    0 25px 50px -12px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
-  border-color: var(--border-light);
+  border-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
   box-shadow:
-    0 30px 60px -15px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-    0 1px 0 rgba(255, 255, 255, 0.15) inset;
+    0 30px 60px -15px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 1px 0 rgba(255, 255, 255, 0.12) inset;
 }
 
 /* Sidebar Styles - Refined */
@@ -313,6 +313,11 @@ nextjs-portal {
 /* Background overrides */
 .bg-white {
   background: var(--bg-card-solid) !important;
+}
+
+/* White sidebar override */
+aside.bg-white {
+  background: #ffffff !important;
 }
 
 .bg-gray-50 {

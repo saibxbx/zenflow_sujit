@@ -182,37 +182,41 @@ export default function Home() {
       )}
 
       {/* Sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-100 p-6 fixed h-full animate-slide-in-left z-30">
+      <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 p-6 fixed h-full animate-slide-in-left z-30">
         <div className="flex items-center gap-3 mb-10">
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center animate-glow-pulse">
+          <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20">
             <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
           </div>
-          <span className="text-xl font-bold animate-gradient-text">ZenFlow</span>
+          <span className="text-xl font-bold text-green-600">ZenFlow</span>
         </div>
 
-        <nav className="flex-1 space-y-2 stagger-children">
+        <nav className="flex-1 space-y-2">
           {sidebarItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
-              className={`sidebar-item w-full ripple ${activeView === item.id ? 'active' : ''}`}
+              className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl transition-all duration-200 ${
+                activeView === item.id 
+                  ? 'bg-green-50 text-green-600 font-semibold border-l-4 border-green-500' 
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+              }`}
             >
-              <item.icon className="w-5 h-5 icon-hover" />
+              <item.icon className="w-5 h-5" />
               {item.label}
             </button>
           ))}
         </nav>
 
-        <div className="pt-6 border-t border-gray-100">
-          <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer group">
+        <div className="pt-6 border-t border-gray-200">
+          <div className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-all duration-300 cursor-pointer group">
             <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-lg shadow-green-500/20 group-hover:scale-105 transition-transform">
               <User className="w-5 h-5 text-white" />
             </div>
             <div>
               <p className="font-medium text-gray-800 text-sm">User</p>
-              <p className="text-xs text-gray-400 flex items-center gap-1">
+              <p className="text-xs text-gray-500 flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                 Free Plan
               </p>
